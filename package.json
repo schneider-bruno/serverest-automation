@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@cypress/grep": "^4.1.0",
+    "@faker-js/faker": "^9.8.0",
+    "cypress": "^14.3.3",
+    "cypress-xpath": "^2.0.1",
+    "mochawesome": "^7.1.3"
+  }
+}
