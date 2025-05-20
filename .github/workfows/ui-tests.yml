@@ -1,0 +1,53 @@
+name: UI Tests
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  seed-users:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Users in DB
+        run: |
+          RESUSER=$(curl -s -X POST "https://serverest.dev/usuarios" \
+            -H "Content-Type: application/json" \
+            -d '{
+                  "nome": "QA User",
+                  "email": "qaautomateduser@test.com",
+                  "password": "qauser#123",
+                  "administrador": "false"
+                  }
+                }')
+          echo "Response: $RESUSER"
+          RESADMIN=$(curl -s -X POST "https://serverest.dev/usuarios" \
+            -H "Content-Type: application/json" \
+            -d '{
+                  "nome": "QA Admin",
+                  "email": "qaautomatedadmin@test.com",
+                  "password": "qaadmin#321",
+                  "administrador": "true"
+                  }
+                }')
+          echo "Response: $RESADMIN"
+
+  cypress-run:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          env: grepTags=@ui
