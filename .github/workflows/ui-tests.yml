@@ -16,7 +16,6 @@ jobs:
                   "email": "qaautomateduser@test.com",
                   "password": "qauser#123",
                   "administrador": "false"
-                  }
                 }')
           echo "Response: $RESUSER"
           RESADMIN=$(curl -s -X POST "https://serverest.dev/usuarios" \
@@ -26,7 +25,6 @@ jobs:
                   "email": "qaautomatedadmin@test.com",
                   "password": "qaadmin#321",
                   "administrador": "true"
-                  }
                 }')
           echo "Response: $RESADMIN"
 
