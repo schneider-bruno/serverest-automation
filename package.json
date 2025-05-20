@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "test:api": "cypress run --env grepTags=@api",
+    "test:ui": "cypress run --browser chrome --env grepTags=@ui",
+    "test:user": "cypress run --browser chrome --env grepTags=@user",
+    "test:admin": "cypress run --browser chrome --env grepTags=@admin",
+    "seed-users": "cypress run --env grepTags=@seed"
+  },
   "devDependencies": {
     "@cypress/grep": "^4.1.0",
     "@faker-js/faker": "^9.8.0",
